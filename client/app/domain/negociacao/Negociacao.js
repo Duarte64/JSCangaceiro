@@ -1,9 +1,14 @@
 class Negociacao {
-    constructor(data, quantidade, valor) { //Construtores
-        this._data = new Date(data.getTime()),
-        this._quantidade = quantidade;
-        this._valor = valor;
-        Object.freeze(this);
+    constructor(_data, _quantidade, _valor) { //Construtores
+        
+        Object.assign(this, { //Adiciona cada uma das propriedades a seu respectivo atributo, sem precisar ficar usando .this toda hora.
+            _quantidade,
+            _valor,
+        });
+
+        this._data = new Date(_data.getTime());
+
+        Object.freeze(this); //Congela objeto para não ser alterado, mas cuidado, é possível contornar com esquemas inteligentes.
     }
 
     get data() {
