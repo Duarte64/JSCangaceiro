@@ -16,14 +16,14 @@ class ProxyFactory {
             },
 
             set(target, prop, value, reciever) {
-                const updated = Reflect.get(target, prop, value);
+                const updated = Reflect.set(target, prop, value);
                 if(prop.includes(prop)) armadilha(target);
                 return updated;
             }
         })
     }
 
-    static ehFuncao(fn) {
+    static _ehFuncao(fn) {
         return typeof(fn) == typeof(Function);
     }
 }

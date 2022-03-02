@@ -19,10 +19,19 @@ class NegociacaoController {
     }
 
     adiciona(event) {
-        event.preventDefault();
-        this._negociacoes.adiciona(this._criaNegociacao());
-        this._mensagem.texto = 'Negociação adicionada com sucesso!';
-        this.limpaFormulario();
+
+        try {
+            event.preventDefault();
+            this._negociacoes.adiciona(this._criaNegociacao());
+            this._mensagem.texto = 'Negociação adicionada com sucesso!';
+            this.limpaFormulario();
+        } catch (err) {
+            if (err instanceof DataInvalidaException) {
+                this._mensagem.texto = err.message;
+            } else {
+                this._mensagem.texto = 'Um erro não esperado aconteceu, entre em contato com o suporte.'
+            }
+        }
     }
 
     limpaFormulario() {
